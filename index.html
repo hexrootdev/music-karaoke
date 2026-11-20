@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="lyrics-container">
+        <p data-time="10">Ай, ай, пиратское наследие</p>
+        <p data-time="13">Я поднимаю чёрный флаг в знак нового времени</p>
+        <p data-time="16">Не знаю, что ждёт впереди, кто встанет на пути</p>
+        <p data-time="19">Суть моего существования — всё изменить</p>
+        <p data-time="21">Да я пират, если умру в бою — меня заберёт океан</p>
+        <p data-time="24">Закончились запасы, мы идём на абордаж</p>
+        <p data-time="27">Нас не сломают штормы, кинем якорь у порта</p>
+        <p data-time="29">Разграбим городок и дальше покорять моря</p>
+    
+    </div>
+    <div class="custom-player">
+        <img src="icons/solar-new.png" alt="Cover" class="song-cover">
+        <button id="play-btn">
+            <img id="play-icon" src="icons/play-icon.svg" alt="Play">
+        </button>
+        <input type="range" id="progress-bar" value="0" min="0" step="0.1">
+        <button id="volume-btn">
+            <img id="volume-icon" src="icons/volume-icon.svg" alt="Volume">
+        </button>
+        <div id="volume-box" class="volume-slider-box">
+            <input type="range" id="volume-bar", value="10" min="0" step="1">
+        </div>
+    </div>
+    <audio id="player" src="audio.mp3"></audio>
+    <script src="script.js"></script>
+</body>
+</html>

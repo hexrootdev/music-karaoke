@@ -1,0 +1,134 @@
+body {
+    background-color: #121212;
+    color: white;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.lyrics-container {
+    padding: 20vh 0;
+    box-sizing: border-box;
+    max-width: 700px;
+    text-align: left;
+}
+
+p {
+    font-size: 60px;
+    font-weight: bold;
+    opacity: 0.35;
+    filter: blur(1.5px);
+    transition: all 0.4s ease;
+}
+
+p.active {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1.5);
+}
+
+.custom-player{
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(30, 30, 30, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    width: fit-content;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    padding: 14px 24px;
+}
+
+.custom-player > *:not(#volume-box) {
+    margin-right: 10px;
+}
+
+.song-cover {
+    width: 90px;
+    height: 90px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+#progress-bar {
+    -webkit-appearance: none;
+    width: 240px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    
+}
+
+#progress-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+}
+
+#play-btn, #volume-btn {
+    margin: 10px;
+    background: none;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+#play-btn img,
+#volume-btn img {
+    filter: invert(1);
+}
+
+#play-btn:hover, #volume-btn:hover {
+    transform: scale(1.3);
+}
+
+.volume-slider-box {
+    width: 0;
+    overflow: hidden; 
+    transition: width 0.5s ease;
+    display: flex;
+    align-items: center;
+}
+
+.volume-slider-box.is-open {
+    width: 24px;
+}
+
+#volume-bar {
+    -webkit-appearance: none;
+    writing-mode: vertical-lr;
+    direction: rtl;
+    height: 100px;
+    width: 5px;
+    margin: 0 0 0 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+}
+
+#volume-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+}
+

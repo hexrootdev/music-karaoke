@@ -9,6 +9,7 @@ load_dotenv()
 access_token = os.getenv("YANDEX_ACCESS")
 
 client = ClientAsync(token=access_token)
+client.request._timeout = 30
 
 async def sort_by_newest(tracks_ids: list[int]):
     track_dates = dict()
@@ -24,18 +25,18 @@ async def sort_by_newest(tracks_ids: list[int]):
 
 async def get_tracks_by_artist(artist: str):
     await client.init()
-    result = []
+    result = dict()
 
     artist_id = (await client.search(text=str(artist))).artists.results[0]["id"]
     tracks = await client.artists_tracks(artist_id)
 
     tracks_ids = []
-    for track in tracks.tracks:
+    for track in tracks.tracks[:5]:
         tracks_ids.append(track.id)
     sorted_tracks_ids = await sort_by_newest(tracks_ids)
     tracks = await client.tracks(track_ids=sorted_tracks_ids)
     for track in tracks:
-        result.append(f"{track.id} | {track.title}")
-    return "\n".join(result)
+        result[track.title] = track.id 
+    return result
 
 

@@ -12,8 +12,7 @@ from aiogram.types import Message, CallbackQuery
 from aiogram.fsm.context import FSMContext as FSM
 from aiogram.fsm.state import State, StatesGroup
 
-from keyboards import get_main_kb
-from yandex_parser import get_tracks_by_artist
+from keyboards import get_main_kb, get_artists_kb
 
 load_dotenv()
 
@@ -25,14 +24,8 @@ class SearchTrack(StatesGroup):
 
 @dp.message(CommandStart())
 async def command_start_handler(message: Message) -> None:
-    await message.answer(f"Привет, {html.bold(message.from_user.full_name)}! Я эхо-бот на aiogram 3.x.", reply_markup=get_main_kb())
+    await message.answer(f"Привет, {html.bold(message.from_user.full_name)}! я - музыкальный бот-парсер. Работаю с Яндекс.Музыкой, LRCLIB и подобные", reply_markup=get_main_kb())
 
-@dp.callback_query(F.data == "month_artists_top")
-async def top_artists_month_handler(call: CallbackQuery):
-    ...
-#    artist = await get_tracks_by_artist
-#    await call.message.answer(text=artist)
-#    await call.answer()
 
 @dp.callback_query(F.data == "search_tracks")
 async def search_tracks_handler(call: CallbackQuery, state: FSM):
@@ -42,8 +35,8 @@ async def search_tracks_handler(call: CallbackQuery, state: FSM):
 @dp.message(SearchTrack.artist_name)
 async def get_artist_name_handler(message: Message, state: FSM):
     artist = str(message.text)
-    tracks = await get_tracks_by_artist(artist=artist)
-    await message.answer(tracks + "\n")
+    kb = await get_artists_kb(artist=artist)
+    await message.answer(f"{html.bold('ТОП 5')} новейших треков артиста {html.bold(artist)}", reply_markup=kb)
     await state.clear()
 
 async def main() -> None:
